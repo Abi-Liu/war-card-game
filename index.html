@@ -1,33 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-    	<meta charset="utf-8">
-    	<meta name="description" content="This is where your description goes">
-    	<meta name="keywords" content="one, two, three">
 
-		<title>Title in the tab</title>
-
-		<!-- external CSS link -->
-		<link rel="stylesheet" href="css/normalize.css">
-		<link rel="stylesheet" href="css/style.css">
-	</head>
-	<body>
-		
-		<h1>WARRRRR!!!!!!</h1>
-
-		<button>Deal 2 cards</button>
-
-		<h2>Player 1</h2>
-		<img id = 'player1' src="" alt="">
-		<h2>Player 2</h2>
-		<img id = 'player2' src="" alt="">
-		<h3></h3>
-		<script type="text/javascript" src="js/main.js"></script>
-	</body>
-</html>
-
-
-<!-- 
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -53,27 +24,35 @@
 			<h2>Player 2</h2>
 			
 		</div>
+		<div id = 'scoreSection'>
+			<h3 id = 'player1Score'>Score: </h3>
+			<h3 id = 'player2Score'>Score: </h3>
+		</div>
 		
 		<div id = 'cardDiv'>
 			<div id = 'player1Cards'>
-				<img id = 'player1' src="" alt="">
-				<div class = 'faceDown'></div>
-				<div class = 'faceDown'></div>
-				<div class = 'faceDown'></div>
-				<img id = 'player1War' src="" alt="">
+				<img id = 'player1' >
+				<div class = 'faceDownContainer'>
+					<div class = 'faceDown'></div>
+					<div class = 'faceDown'></div>
+					<div class = 'faceDown'></div>
+				</div>
+				<div id = 'player1War'></div>
 			</div>
 		
 			<div  id = 'player2Cards'>
-				<img id = 'player2' src="" alt="">
-				<div class = 'faceDown'></div>
-				<div class = 'faceDown'></div>
-				<div class = 'faceDown'></div>
-				<img id = 'player1War' src="" alt="">
+				<img id = 'player2'  >
+				<div class = 'faceDownContainer'>
+					<div class = 'faceDown'></div>
+					<div class = 'faceDown'></div>
+					<div class = 'faceDown'></div>
+				</div>
+				<div id = player2War></div>
 			</div>
 			
 		</div>
 
-		<h3></h3>
+		<h3 id = 'result'></h3>
 		<script type="text/javascript" src="js/main.js"></script>
 	</body>
-</html> -->
+</html>

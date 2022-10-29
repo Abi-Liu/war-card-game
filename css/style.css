@@ -13,11 +13,12 @@
 img{
   display: block;
   margin: 0 auto;
-  /* height: 208px;
-  width: 150px */
+  height: 200px;
+  width: 140px;
 }
 
-/* h3{
+
+h3{
   text-align: center;
 }
 
@@ -33,7 +34,21 @@ img{
 #cardDiv{
   display: flex;
   justify-content: space-around;
-} */
+} 
+
+.faceDownContainer{
+  display: flex;
+  padding: 3% 0%;
+}
+
+.faceDown{
+  margin-left: 3%;
+}
+
+#scoreSection{
+  display: flex;
+  justify-content: space-around;
+}
 /******************************************
 /* ADDITIONAL STYLES
-/*******************************************/
+/******************************************
