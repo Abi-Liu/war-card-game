@@ -1,0 +1,39 @@
+/******************************************
+/* CSS
+/*******************************************/
+
+/* Box Model Hack */
+*{
+  box-sizing: border-box;
+}
+
+/******************************************
+/* LAYOUT
+/*******************************************/
+img{
+  display: block;
+  margin: 0 auto;
+  /* height: 208px;
+  width: 150px */
+}
+
+/* h3{
+  text-align: center;
+}
+
+#heading{
+  text-align: center;
+}
+
+#player{
+  display: flex;
+  justify-content: space-around;
+}
+
+#cardDiv{
+  display: flex;
+  justify-content: space-around;
+} */
+/******************************************
+/* ADDITIONAL STYLES
+/*******************************************/
