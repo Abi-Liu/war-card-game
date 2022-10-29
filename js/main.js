@@ -16,15 +16,19 @@ document.querySelector('button').addEventListener('click', drawTwoCards)
 function keepScore(p1, p2){
   player1Score+=p1
   player2Score+=p2
-  displayScore(player1Score, player2Score)
+  displayScore()
 }
 
-function displayScore(score1, score2){
-  document.getElementById('player1Score').innerText += score1.toString()
-  document.getElementById('player2Score').innerText += score2.toString()
+function displayScore(){
+
+  document.getElementById('player1Score').innerText = `Score: ${player1Score}`
+  document.getElementById('player2Score').innerText = `Score: ${player2Score}`
 }
 
 function drawTwoCards(){
+  document.querySelectorAll('.faceDown').forEach(x => x.innerHTML = '')
+  document.getElementById('player1War').innerHTML = ''
+  document.getElementById('player2War').innerHTML = ''
   const url = `https://deckofcardsapi.com/api/deck/${deckID}/draw/?count=2`
   fetch(url)
       .then(res => res.json()) // parse response as JSON
