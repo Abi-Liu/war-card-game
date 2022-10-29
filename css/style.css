@@ -49,6 +49,9 @@ h3{
   display: flex;
   justify-content: space-around;
 }
+img:not([src]) {
+  visibility: hidden;
+}
 /******************************************
 /* ADDITIONAL STYLES
 /******************************************
