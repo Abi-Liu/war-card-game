@@ -42,7 +42,7 @@ function resetGame(){
   localStorage.setItem('p2Score', 0)
   player2Score = 0
   document.getElementById('player1Score').innerText = `Score: ` + 0
-  document.getElementById('player1Score').innerText = `Score: ` + 0
+  document.getElementById('player2Score').innerText = `Score: ` + 0
   fetch(`https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1`)
   .then(res => res.json() )
   .then(data => {
