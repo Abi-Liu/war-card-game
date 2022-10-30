@@ -15,6 +15,8 @@ if(localStorage.getItem('p1Score') && localStorage.getItem('p2Score')){
 } else {
   localStorage.setItem('p1Score', 0)
   localStorage.setItem('p2Score', 0)
+  player1Score = Number(localStorage.getItem('p1Score'))
+  player2Score = Number(localStorage.getItem('p2Score'))
 }
 
 
