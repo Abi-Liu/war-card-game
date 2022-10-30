@@ -1,28 +1,72 @@
 
-let deckID =''
-//document.getElementById('player1War').display = none
-let player1Score = 0
-let player2Score = 0
+let player1Score 
+let player2Score 
 
-fetch(`https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1`)
+let deckID = localStorage.getItem('id')
+
+
+//document.getElementById('player1War').display = none
+
+
+
+if(localStorage.getItem('p1Score') && localStorage.getItem('p2Score')){
+   player1Score = Number(localStorage.getItem('p1Score'))
+   player2Score = Number(localStorage.getItem('p2Score'))
+} else {
+  localStorage.setItem('p1Score', 0)
+  localStorage.setItem('p2Score', 0)
+}
+
+
+
+if(!localStorage.getItem('id')){
+  
+  fetch(`https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1`)
   .then(res => res.json() )
   .then(data => {
     console.log(data)
-    deckID = data.deck_id
+    localStorage.setItem('id', data.deck_id)
+    deckID = localStorage.getItem('id')
   })
-document.querySelector('button').addEventListener('click', drawTwoCards)
+}
 
+document.getElementById('deal').addEventListener('click', drawTwoCards)
+document.getElementById('reset').addEventListener('click', resetGame)
+
+
+function resetGame(){
+  localStorage.setItem('id', '')
+  deckID = ''
+  localStorage.setItem('p1Score', 0)
+  player1Score = 0
+  localStorage.setItem('p2Score', 0)
+  player2Score = 0
+  document.getElementById('player1Score').innerText = `Score: ` + 0
+  document.getElementById('player1Score').innerText = `Score: ` + 0
+  fetch(`https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1`)
+  .then(res => res.json() )
+  .then(data => {
+    console.log(data)
+    localStorage.setItem('id', data.deck_id)
+    deckID = localStorage.getItem('id')
+  })
+  .catch(err => {
+    console.log(`error ${err}`)
+  })
+}
 
 function keepScore(p1, p2){
   player1Score+=p1
   player2Score+=p2
+  localStorage.setItem('p1Score', player1Score)
+  localStorage.setItem('p2Score', player2Score)
   displayScore()
 }
 
 function displayScore(){
 
-  document.getElementById('player1Score').innerText = `Score: ${player1Score}`
-  document.getElementById('player2Score').innerText = `Score: ${player2Score}`
+  document.getElementById('player1Score').innerText = 'Score:' + player1Score
+  document.getElementById('player2Score').innerText = `Score: ` + player2Score
 }
 
 function drawTwoCards(){
