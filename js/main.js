@@ -5,13 +5,16 @@ let player2Score
 let deckID = localStorage.getItem('id')
 
 
-//document.getElementById('player1War').display = none
-
 
 
 if(localStorage.getItem('p1Score') && localStorage.getItem('p2Score')){
    player1Score = Number(localStorage.getItem('p1Score'))
    player2Score = Number(localStorage.getItem('p2Score'))
+   document.getElementById('player1Score').innerText = `Score: ${player1Score}`
+   document.getElementById('player2Score').innerText = `Score: ${player2Score}` 
+   document.getElementById('player1').src = localStorage.getItem('p1CurrentCardImage')
+   document.getElementById('player2').src = localStorage.getItem('p2CurrentCardImage')
+   document.getElementById('remaining').innerText = `Cards Remaining: ${localStorage.getItem('remaining')}`
 } else {
   localStorage.setItem('p1Score', 0)
   localStorage.setItem('p2Score', 0)
@@ -45,6 +48,7 @@ function resetGame(){
   player2Score = 0
   document.getElementById('player1Score').innerText = `Score: ` + 0
   document.getElementById('player2Score').innerText = `Score: ` + 0
+  document.getElementById('remaining').innerText = `Cards Remaining: 52`
   fetch(`https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1`)
   .then(res => res.json() )
   .then(data => {
@@ -80,9 +84,12 @@ function drawTwoCards(){
       .then(res => res.json()) // parse response as JSON
       .then(data => {
         console.log(data)
-        
-        document.getElementById('player1').src = data.cards[0].image
-        document.getElementById('player2').src = data.cards[1].image
+        localStorage.setItem('remaining', data.remaining)
+        localStorage.setItem('p1CurrentCardImage', data.cards[0].image)
+        localStorage.setItem('p2CurrentCardImage', data.cards[1].image)
+        document.getElementById('player1').src = localStorage.getItem('p1CurrentCardImage')
+        document.getElementById('player2').src = localStorage.getItem('p2CurrentCardImage')
+        document.getElementById('remaining').innerText = `Cards Remaining: ${localStorage.getItem('remaining')}`
         if(getNumberValue(data.cards[0].value) > getNumberValue(data.cards[1].value)){
           document.getElementById('result').innerText='Player 1 Wins!'
           keepScore(2, 0)
@@ -92,6 +99,9 @@ function drawTwoCards(){
       } else {
         document.getElementById('result').innerText='WARRR'
         war()
+      }
+      if(localStorage.getItem('remaining') === '0'){
+        winner()
       }
     })
       .catch(err => {
@@ -126,7 +136,8 @@ function war(){
       .then(res => res.json()) // parse response as JSON
       .then(data => {
         console.log(data)
-        
+        localStorage.setItem('remaining', data.remaining)
+        document.getElementById('remaining').innerText = `Cards Remaining: ${localStorage.getItem('remaining')}`
         document.getElementById('player1War').innerHTML = `<img class = "faceDownCards" src = "https://deckofcardsapi.com/static/img/${data.cards[0].code}.png"></img>`
         document.getElementById('player2War').innerHTML = `<img class = "faceDownCards" src = "https://deckofcardsapi.com/static/img/${data.cards[1].code}.png"></img>`
         if(getNumberValue(data.cards[0].value) > getNumberValue(data.cards[1].value)){
@@ -138,8 +149,22 @@ function war(){
       } else {
         document.getElementById('result').innerText='WARRR'
       }
+      if(localStorage.getItem('remaining') === '0'){
+        winner()
+      }
     })
       .catch(err => {
           console.log(`error ${err}`)
       });
+}
+
+
+function winner(){
+  if(player1Score > player2Score){
+    alert('Player1 Wins!')
+  } else if (player1Score < player2Score){
+    alert('Player 2 Wins!')
+  } else {
+    alert('Tie')
+  }
 }
